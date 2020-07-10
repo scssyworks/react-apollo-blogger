@@ -83,7 +83,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "app:server:api": "json-server --watch server/database/db.json --port 3004",
-    "app:server:dev": "nodemon server/index.js",
+    "app:server:dev": "node server/index.js",
     "app:client:dev": "node scripts/start.js"
   },
   "eslintConfig": {

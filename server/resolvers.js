@@ -1,10 +1,16 @@
 const resolvers = {
     Query: {
-        articles: (_, __, { dataSources }) => dataSources.articles.getArticles(),
-        article: (_, { id }, { dataSources }) => dataSources.articles.getArticle(id)
+        articles: (_, { userId }, { dataSources }) => dataSources.articles.getArticles(userId),
+        article: (_, { id }, { dataSources }) => dataSources.articles.getArticle(id),
+        user: (_, { id }, { dataSources }) => dataSources.users.getUser(id)
     },
     Article: {
-        comments: ({ id }, _, { dataSources }) => dataSources.comments.getComments(id)
+        comments: ({ id }, _, { dataSources }) => dataSources.comments.getComments(id),
+        user: ({ userId }, _, { dataSources }) => dataSources.users.getUser(userId)
+    },
+    Comment: {
+        user: ({ userId }, _, { dataSources }) => dataSources.users.getUser(userId),
+        article: ({ articleId }, _, { dataSources }) => dataSources.articles.getArticle(articleId)
     },
     Mutation: {
         addArticle: (_, args, { dataSources }) => dataSources.articles.addArticle(args),
@@ -12,7 +18,8 @@ const resolvers = {
         updateArticle: (_, args, { dataSources }) => dataSources.articles.updateArticle(args),
         addComment: (_, args, { dataSources }) => dataSources.comments.addComment(args),
         deleteComment: (_, { id }, { dataSources }) => dataSources.comments.deleteComment(id),
-        editComment: (_, args, { dataSources }) => dataSources.comments.editComment(args)
+        editComment: (_, args, { dataSources }) => dataSources.comments.editComment(args),
+        createUser: (_, args, { dataSources }) => dataSources.users.createUser(args)
     }
 };
 

@@ -1,4 +1,28 @@
 {
-    "articles": [],
-    "comments": []
+    "articles": [
+        {
+            "id": "3",
+            "userId": "1",
+            "commentId": "2",
+            "title": "Article title",
+            "content": "Article content"
+        }
+    ],
+    "comments": [
+        {
+            "id": "2",
+            "userId": "1",
+            "articleId": "3",
+            "title": "Sample Comment",
+            "description": "Sample description"
+        }
+    ],
+    "users": [
+        {
+            "id": "1",
+            "username": "contactsachinsingh",
+            "firstName": "Sachin",
+            "lastName": "Singh"
+        }
+    ]
 }

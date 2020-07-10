@@ -5,8 +5,8 @@ class Articles extends RESTDataSource {
         super();
         this.baseURL = 'http://localhost:3004/';
     }
-    async getArticles() {
-        return this.get(`articles`);
+    async getArticles(userId) {
+        return this.get(`users/${userId}/articles`);
     }
     async getArticle(id) {
         return this.get(`articles/${id}`);
