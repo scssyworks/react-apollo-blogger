@@ -1,39 +1,18 @@
 const resolvers = {
     Query: {
-        user: (...args) => {
-            const [, data, context] = args;
-            return context.dataSources.contentAPI.getUser(data.id);
-        },
-        company: (...args) => {
-            const [, data, context] = args;
-            return context.dataSources.contentAPI.getCompany(data.id);
-        }
+        articles: (_, __, { dataSources }) => dataSources.articles.getArticles(),
+        article: (_, { id }, { dataSources }) => dataSources.articles.getArticle(id)
     },
-    UserType: {
-        company: (...args) => {
-            const [parent, , context] = args;
-            return context.dataSources.contentAPI.getCompany(parent.companyId);
-        }
-    },
-    CompanyType: {
-        users: (...args) => {
-            const [parent, , context] = args;
-            return context.dataSources.contentAPI.getUsersForCompany(parent.id);
-        }
+    Article: {
+        comments: ({ id }, _, { dataSources }) => dataSources.comments.getComments(id)
     },
     Mutation: {
-        addUser: (...args) => {
-            const [, data, context] = args;
-            return context.dataSources.contentAPI.addUser(data);
-        },
-        deleteUser: (...args) => {
-            const [, data, context] = args;
-            return context.dataSources.contentAPI.deleteUser(data.id);
-        },
-        updateUser: (...args) => {
-            const [, data, context] = args;
-            return context.dataSources.contentAPI.updateUser(data);
-        }
+        addArticle: (_, args, { dataSources }) => dataSources.articles.addArticle(args),
+        deleteArticle: (_, { id }, { dataSources }) => dataSources.articles.deleteArticle(id),
+        updateArticle: (_, args, { dataSources }) => dataSources.articles.updateArticle(args),
+        addComment: (_, args, { dataSources }) => dataSources.comments.addComment(args),
+        deleteComment: (_, { id }, { dataSources }) => dataSources.comments.deleteComment(id),
+        editComment: (_, args, { dataSources }) => dataSources.comments.editComment(args)
     }
 };
 
