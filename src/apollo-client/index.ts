@@ -3,9 +3,11 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
+import { typeDefs, resolvers } from './resolvers';
 
+const cache = new InMemoryCache();
 export const client = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache,
     link: ApolloLink.from([
         onError(({ graphQLErrors, networkError }) => {
             if (graphQLErrors) {
@@ -25,5 +27,19 @@ export const client = new ApolloClient({
             uri: 'http://localhost:4000/graphql',
             credentials: 'same-origin'
         })
-    ])
+    ]),
+    typeDefs,
+    resolvers
+});
+
+// Writing local cache defaults
+cache.writeData({
+    data: {
+        newUser: {
+            __typename: 'NewUser',
+            firstName: '',
+            lastName: '',
+            username: ''
+        }
+    }
 });
