@@ -8,10 +8,8 @@ export interface CurrentUser {
 
 export const CURRENT_USER = gql`
     query {
-        newUser @client {
-            firstName
-            lastName
-            username
-        }
+        firstName @client
+        lastName @client
+        username @client
     }
 `;

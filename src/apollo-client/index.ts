@@ -35,11 +35,8 @@ export const client = new ApolloClient({
 // Writing local cache defaults
 cache.writeData({
     data: {
-        newUser: {
-            __typename: 'NewUser',
-            firstName: '',
-            lastName: '',
-            username: ''
-        }
+        firstName: '',
+        lastName: '',
+        username: ''
     }
 });

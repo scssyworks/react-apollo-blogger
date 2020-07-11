@@ -1,22 +1,19 @@
 import gql from 'graphql-tag';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Resolvers } from 'apollo-client';
-import { CURRENT_USER, CurrentUser } from '../../components/SignUpForm/queries/getCurrentUserQuery';
-import { clean } from '../../utils';
+import { CurrentUser } from '../../components/SignUpForm/queries/getCurrentUserQuery';
 
 export const typeDefs = gql`
     type Query {
-        newUser: NewUser!
-    }
-
-    type NewUser {
         firstName: String
         lastName: String
         username: String
     }
 
     type Mutation {
-        updateUser(firstName:String, lastName: String, username: String): NewUser
+        updateFirstName(firstName: String!): String
+        updateLastName(lastName: String!): String
+        updateUsername(username: String!): String
     }
 `;
 
@@ -34,17 +31,17 @@ interface AppResolvers extends Resolvers {
     Mutation: ResolverMap
 }
 
+const resolverFn = (_: any, data: Partial<CurrentUser>, { cache }: { cache: InMemoryCache }): any => {
+    cache.writeData({
+        data
+    });
+    return 'success';
+};
+
 export const resolvers: AppResolvers = {
     Mutation: {
-        updateUser: (_: any, args: Partial<CurrentUser>, { cache }: { cache: InMemoryCache }): any => {
-            const { newUser } = cache.readQuery({ query: CURRENT_USER }) as { newUser: Partial<CurrentUser> };
-            const updatedUser = Object.assign(newUser, clean(args));
-            cache.writeData({
-                data: {
-                    newUser: updatedUser
-                }
-            });
-            return args;
-        }
+        updateFirstName: resolverFn,
+        updateLastName: resolverFn,
+        updateUsername: resolverFn
     }
 };
