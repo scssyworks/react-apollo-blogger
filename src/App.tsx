@@ -1,14 +1,24 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
-import './App.css';
+import { CssBaseline, Container } from '@material-ui/core';
+import './App.scss';
 import { client } from './apollo-client';
+import Header from './components/Header';
+import Home from './containers/Home';
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        This is a blog app
-      </div>
+      <CssBaseline />
+      <Container>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Home} />
+          </Switch>
+        </BrowserRouter>
+      </Container>
     </ApolloProvider>
   );
 }

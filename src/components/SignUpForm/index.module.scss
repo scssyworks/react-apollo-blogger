@@ -1,0 +1,26 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+
+    .controls {
+        width: 100%;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+
+        >div {
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            width: 600px;
+        }
+    }
+
+    .form-submit {
+        margin-top: 24px;
+        min-width: 232px;
+        align-self: center;
+    }
+}
