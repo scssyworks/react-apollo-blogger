@@ -6,6 +6,7 @@ import './App.scss';
 import { client } from './apollo-client';
 import Header from './components/Header';
 import Home from './containers/Home';
+import ArticleList from './containers/ArticleList';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Header />
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/posts" component={ArticleList} />
           </Switch>
         </BrowserRouter>
       </Container>

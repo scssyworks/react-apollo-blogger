@@ -17,3 +17,9 @@ export const SET_USER_NAME = gql`
         updateUsername(username: $username) @client
     }
 `;
+
+export const SET_USER_ID = gql`
+    mutation setCurrentUserId($id: ID!) {
+        setUserId(id: $id) @client
+    }
+`;

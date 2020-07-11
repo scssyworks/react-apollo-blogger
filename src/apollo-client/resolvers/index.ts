@@ -8,12 +8,14 @@ export const typeDefs = gql`
         firstName: String
         lastName: String
         username: String
+        loggedInUserId: ID
     }
 
     type Mutation {
         updateFirstName(firstName: String!): String
         updateLastName(lastName: String!): String
         updateUsername(username: String!): String
+        setUserId(id: ID!): String
     }
 `;
 
@@ -31,7 +33,7 @@ interface AppResolvers extends Resolvers {
     Mutation: ResolverMap
 }
 
-const resolverFn = (_: any, data: Partial<CurrentUser>, { cache }: { cache: InMemoryCache }): any => {
+const resolverFn = (_: any, data: Partial<CurrentUser>, { cache }: { cache: InMemoryCache }): string => {
     cache.writeData({
         data
     });
@@ -42,6 +44,14 @@ export const resolvers: AppResolvers = {
     Mutation: {
         updateFirstName: resolverFn,
         updateLastName: resolverFn,
-        updateUsername: resolverFn
+        updateUsername: resolverFn,
+        setUserId: (_: any, { id }: { id: string }, { cache }: { cache: InMemoryCache }): string => {
+            cache.writeData({
+                data: {
+                    loggedInUserId: id
+                }
+            });
+            return 'success';
+        }
     }
 };
