@@ -1,11 +1,19 @@
 import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { typeDefs, resolvers } from './resolvers';
+import { persistCache } from 'apollo-cache-persist';
+import { PersistentStorage, PersistedData } from 'apollo-cache-persist/types';
 
 const cache = new InMemoryCache();
+
+persistCache({
+    cache,
+    storage: window.localStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>
+});
+
 export const client = new ApolloClient({
     cache,
     link: ApolloLink.from([

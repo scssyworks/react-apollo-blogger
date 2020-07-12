@@ -1,8 +1,9 @@
 import React from 'react';
+import ArticleSummary from '../../components/ArticleSummary';
 
 const ArticleList = () => (
     <section className="main-content">
-        Article List
+        <ArticleSummary />
     </section>
 );
 

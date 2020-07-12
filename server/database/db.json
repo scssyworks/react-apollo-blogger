@@ -59,6 +59,18 @@
       "lastName": "userid",
       "username": "inspect",
       "id": "KBad8iN"
+    },
+    {
+      "firstName": "Generic",
+      "lastName": "User",
+      "username": "genericuser",
+      "id": "B2pQjXs"
+    },
+    {
+      "firstName": "cache",
+      "lastName": "persistence",
+      "username": "cachepersistencetest",
+      "id": "JIduK36"
     }
   ]
 }
