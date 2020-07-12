@@ -1,0 +1,24 @@
+.form-section {
+    h2 {
+        margin-bottom: 16px;
+    }
+}
+
+.form-card {
+    padding: 24px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .title-text {
+        margin-bottom: 24px;
+    }
+
+    .form-submit {
+        margin-top: 24px;
+        width: 200px;
+        align-self: flex-end;
+    }
+}

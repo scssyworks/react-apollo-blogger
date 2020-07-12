@@ -4,15 +4,7 @@ export interface ArticleListData {
     articles: {
         id: string;
         title: string;
-        content: string;
-        comments: {
-            id: string;
-            title: string;
-            description: string;
-            user: {
-                id: string;
-            };
-        };
+        description: string;
     }[];
 }
 
@@ -21,15 +13,7 @@ export const FETCH_LIST = gql`
         articles(userId: $userId) {
             id
             title
-            content
-            comments {
-                id
-                title
-                description
-                user {
-                    firstName
-                }
-            }
+            description
         }
     }
 `;

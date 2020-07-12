@@ -10,7 +10,7 @@ const ArticleItem = ({ history, title, content }: {
     title: string,
     content: string
 }) => (
-        <li>
+        <li className={classes['article-list-item']}>
             <Card className={classes['article-item']}>
                 <Typography component="h2" variant="h6">
                     <Link className={classes['article-title']} to="/article">{title}</Link>

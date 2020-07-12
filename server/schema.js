@@ -18,7 +18,7 @@ const typeDefs = gql`
         id: ID
         user: User
         title: String
-        content: String
+        description: String
         comments: [Comment]
     }
 
