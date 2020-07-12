@@ -1,7 +1,10 @@
 import React from 'react';
+import EditArticleForm from '../../components/EditArticleForm';
 
 const ArticleEdit = () => (
-    <section>This is article edit form</section>
+    <section>
+        <EditArticleForm />
+    </section>
 );
 
 export default ArticleEdit;

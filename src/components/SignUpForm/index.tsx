@@ -38,12 +38,12 @@ const SignUpForm = ({ className, history }: { className: string, history: { push
     const [setLastName] = useMutation(SET_LAST_NAME);
     const [setCurrentUserId] = useMutation(SET_USER_ID);
     const [submitUser] = useMutation(SUBMIT_FORM, {
-        onCompleted({ createUser }: { createUser: { id: string } }) {
+        onCompleted: async ({ createUser }: { createUser: { id: string } }) => {
             // Reset fields
-            setFirstName({ variables: { firstName: '' } });
-            setLastName({ variables: { lastName: '' } });
-            setUsername({ variables: { username: '' } });
-            setCurrentUserId({ variables: { id: createUser.id } });
+            await setFirstName({ variables: { firstName: '' } });
+            await setLastName({ variables: { lastName: '' } });
+            await setUsername({ variables: { username: '' } });
+            await setCurrentUserId({ variables: { id: createUser.id } });
             // Navigate
             history.push('/posts');
         }
