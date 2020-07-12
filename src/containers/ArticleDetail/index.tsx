@@ -1,8 +1,9 @@
 import React from 'react';
+import Article from '../../components/Article';
 
 const ArticleDetail = () => (
     <section className="main-content">
-        Article Detail
+        <Article />
     </section>
 );
 
