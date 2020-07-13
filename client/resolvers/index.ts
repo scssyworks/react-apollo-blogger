@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Resolvers } from 'apollo-client';
-import { CurrentUser } from '../../components/SignUpForm/queries/getCurrentUserQuery';
+import { CurrentUser } from '../../src/components/SignUpForm/queries/getCurrentUserQuery';
 
 export const typeDefs = gql`
     type Query {

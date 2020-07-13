@@ -3,12 +3,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import { CssBaseline, Container } from '@material-ui/core';
 import './App.scss';
-import { client } from './apollo-client';
+import { client } from '../client';
 import Header from './components/Header';
-import Home from './containers/Home';
-import ArticleList from './containers/ArticleList';
-import ArticleDetail from './containers/ArticleDetail';
-import ArticleEdit from './containers/ArticleEdit';
+import Home from './pages/Home';
+import ArticleList from './pages/ArticleList';
+import ArticleDetail from './pages/ArticleDetail';
+import ArticleEdit from './pages/ArticleEdit';
 
 function App() {
   return (
