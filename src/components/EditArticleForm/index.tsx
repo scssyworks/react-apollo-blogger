@@ -1,12 +1,12 @@
 import React, { FormEvent } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
 import classes from './index.module.scss';
-import { userResolver } from '../../hoc/userResolver';
+import { withUser } from '../../hoc/withUser';
 import { useMutation } from 'react-apollo';
 import { SUBMIT_ARTICLE } from './mutations/submitArticle';
 import { FETCH_LIST } from '../ArticleSummary/queries/fetchArticleList';
 
-const EditArticleForm = userResolver(({ loggedInUserId, history }: {
+const EditArticleForm = withUser(({ loggedInUserId, history }: {
     loggedInUserId: string,
     history: {
         push: (url: string) => void

@@ -4,9 +4,9 @@ import classes from './index.module.scss';
 import { useQuery } from 'react-apollo';
 import { FETCH_LIST, ArticleListData } from './queries/fetchArticleList';
 import Loader from '../../atoms/Loader';
-import { userResolver } from '../../hoc/userResolver';
+import { withUser } from '../../hoc/withUser';
 
-const ArticleSummary = userResolver(({ history, loggedInUserId }: { history: any, loggedInUserId: string }) => {
+const ArticleSummary = withUser(({ history, loggedInUserId }: { history: any, loggedInUserId: string }) => {
     // get list of articles for current user
     const { data: articleData, loading } = useQuery<ArticleListData>(FETCH_LIST, {
         variables: {
