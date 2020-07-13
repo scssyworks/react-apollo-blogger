@@ -1,125 +1,14 @@
 {
   "articles": [
     {
-      "id": "3",
-      "userId": "1",
-      "commentId": "2",
-      "title": "Article title",
-      "description": "Article content"
-    },
-    {
-      "title": "testing",
-      "description": "first post",
+      "title": "test",
+      "description": "test",
       "userId": "oF5ARic",
-      "id": "AX05sFV"
-    },
-    {
-      "title": "testing another",
-      "description": "this seems to work fine at the moment",
-      "userId": "oF5ARic",
-      "id": "99VVcSD"
+      "id": "s6MsdlI"
     }
   ],
-  "comments": [
-    {
-      "id": "2",
-      "userId": "1",
-      "articleId": "3",
-      "title": "Sample Comment",
-      "description": "Sample description"
-    }
-  ],
+  "comments": [],
   "users": [
-    {
-      "id": "1",
-      "username": "contactsachinsingh",
-      "firstName": "Sachin",
-      "lastName": "Singh"
-    },
-    {
-      "firstName": "Saumya",
-      "lastName": "Singh",
-      "username": "saumyasingh",
-      "id": "eYaIDIJ"
-    },
-    {
-      "firstName": "Mohit",
-      "lastName": "Purohit",
-      "username": "mohpuro",
-      "id": "DgMPGbt"
-    },
-    {
-      "firstName": "test",
-      "lastName": "user",
-      "username": "testuser",
-      "id": "ozljGXw"
-    },
-    {
-      "firstName": "New",
-      "lastName": "User",
-      "username": "testingreset",
-      "id": "sKR4xwZ"
-    },
-    {
-      "firstName": "test",
-      "lastName": "args",
-      "username": "testargs",
-      "id": "V6jyMDc"
-    },
-    {
-      "firstName": "test",
-      "lastName": "userid",
-      "username": "inspect",
-      "id": "KBad8iN"
-    },
-    {
-      "firstName": "Generic",
-      "lastName": "User",
-      "username": "genericuser",
-      "id": "B2pQjXs"
-    },
-    {
-      "firstName": "cache",
-      "lastName": "persistence",
-      "username": "cachepersistencetest",
-      "id": "JIduK36"
-    },
-    {
-      "firstName": "new",
-      "lastName": "user",
-      "username": "newusertesting",
-      "id": "XZFQaPY"
-    },
-    {
-      "firstName": "Sunday",
-      "lastName": "Monday",
-      "username": "Tuesday",
-      "id": "oUAMlU5"
-    },
-    {
-      "firstName": "testing",
-      "lastName": "user",
-      "username": "useridtest",
-      "id": "YRuwBf3"
-    },
-    {
-      "firstName": "async",
-      "lastName": "await",
-      "username": "asyncawaittest",
-      "id": "3qHbHtv"
-    },
-    {
-      "firstName": "testing",
-      "lastName": "again",
-      "username": "username",
-      "id": "iA13wOJ"
-    },
-    {
-      "firstName": "testing",
-      "lastName": "testing",
-      "username": "newtest",
-      "id": "9K0TL4a"
-    },
     {
       "firstName": "money",
       "lastName": "control",
