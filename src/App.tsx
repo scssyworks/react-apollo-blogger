@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import { CssBaseline, Container } from '@material-ui/core';
 import './App.scss';
-import { client } from '../client';
+import { client } from './client';
 import Header from './components/Header';
 import Home from './pages/Home';
 import ArticleList from './pages/ArticleList';

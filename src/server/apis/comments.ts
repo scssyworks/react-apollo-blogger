@@ -1,23 +1,21 @@
-const { RESTDataSource } = require('apollo-datasource-rest');
+import { RESTDataSource } from 'apollo-datasource-rest';
 
-class Comments extends RESTDataSource {
+export default class Comments extends RESTDataSource {
     constructor() {
         super();
         this.baseURL = 'http://localhost:3004/';
     }
-    async getComments(articleId) {
+    async getComments(articleId: string) {
         return this.get(`articles/${articleId}/comments`);
     }
-    async addComment(args) {
+    async addComment(args: any) {
         return this.post(`comments`, args);
     }
-    async deleteComment(id) {
+    async deleteComment(id: string) {
         return this.delete(`comments/${id}`);
     }
-    async editComment(args) {
+    async editComment(args: { id: string, [props: string]: any }) {
         const { id } = args;
         return this.patch(`comments/${id}`, args);
     }
 }
-
-module.exports = Comments;
