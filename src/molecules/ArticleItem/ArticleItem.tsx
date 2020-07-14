@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Typography, ButtonGroup, Button } from '@material-ui/core';
+import { Edit, Delete } from '@material-ui/icons';
 import classes from './ArticleItem.module.scss';
 import { Link } from 'react-router-dom';
 
@@ -16,9 +17,13 @@ const ArticleItem = ({ history, title, content }: {
                     <Link className={classes['article-title']} to="/article">{title}</Link>
                 </Typography>
                 <Typography component="p" variant="subtitle1">{content}</Typography>
-                <ButtonGroup size="small" variant="text" color="primary" aria-label="text primary button group">
-                    <Button onClick={() => history.push('/article/edit/testid')}>Edit</Button>
-                    <Button>Delete</Button>
+                <ButtonGroup size="small" variant="text" color="inherit" aria-label="text primary button group">
+                    <Button className={classes['btn-color']} onClick={() => history.push('/article/edit/testid')}>
+                        <Edit fontSize="small" color="inherit" />
+                    </Button>
+                    <Button className={classes['btn-color']}>
+                        <Delete fontSize="small" color="inherit" />
+                    </Button>
                 </ButtonGroup>
             </Card>
         </li>
