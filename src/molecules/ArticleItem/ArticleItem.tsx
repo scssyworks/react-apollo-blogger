@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Typography, ButtonGroup, Button } from '@material-ui/core';
-import classes from './index.module.scss';
+import classes from './ArticleItem.module.scss';
 import { Link } from 'react-router-dom';
 
 const ArticleItem = ({ history, title, content }: {
@@ -24,4 +24,4 @@ const ArticleItem = ({ history, title, content }: {
         </li>
     );
 
-export default ArticleItem
+export default ArticleItem;
