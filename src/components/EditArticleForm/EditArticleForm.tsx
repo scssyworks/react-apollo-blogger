@@ -2,7 +2,7 @@ import React, { FormEvent } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
 import classes from './EditArticleForm.module.scss';
 import { withUser } from '../../hoc/withUser';
-import { useMutation } from 'react-apollo';
+import { useMutation } from '@apollo/client';
 import { SUBMIT_ARTICLE } from './mutations/submitArticle';
 import { FETCH_LIST } from '../ArticleSummary/queries/fetchArticleList';
 

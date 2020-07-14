@@ -1,7 +1,7 @@
 import React from 'react';
 import ArticleItem from '../../molecules/ArticleItem';
 import classes from './ArticleSummary.module.scss';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import { FETCH_LIST, ArticleListData } from './queries/fetchArticleList';
 import Loader from '../../atoms/Loader';
 import { withUser } from '../../hoc/withUser';

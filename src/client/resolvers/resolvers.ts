@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { Resolvers } from 'apollo-client';
+import { InMemoryCache } from '@apollo/client/cache';
+import { Resolvers } from '@apollo/client';
 import { CurrentUser } from '../../components/SignUpForm/queries/getCurrentUserQuery';
 
 export const typeDefs = gql`
@@ -33,20 +33,32 @@ interface AppResolvers extends Resolvers {
     Mutation: ResolverMap
 }
 
-const resolverFn = (_: any, data: Partial<CurrentUser>, { cache }: { cache: InMemoryCache }): string => {
-    cache.writeData({
-        data
-    });
-    return 'success';
+const resolverFn = (type: string) => {
+    return (_: any, data: Partial<CurrentUser>, { cache }: { cache: InMemoryCache }): string => {
+        cache.writeQuery({
+            query: gql`
+                query UserData {
+                    ${type}: String
+                }
+            `,
+            data
+        });
+        return 'success';
+    };
 };
 
 export const resolvers: AppResolvers = {
     Mutation: {
-        updateFirstName: resolverFn,
-        updateLastName: resolverFn,
-        updateUsername: resolverFn,
+        updateFirstName: resolverFn('firstName'),
+        updateLastName: resolverFn('lastName'),
+        updateUsername: resolverFn('username'),
         setUserId: (_: any, { id }: { id: string }, { cache }: { cache: InMemoryCache }): string => {
-            cache.writeData({
+            cache.writeQuery({
+                query: gql`
+                    query UserData {
+                        loggedInUserId: ID
+                    }
+                `,
                 data: {
                     loggedInUserId: id
                 }

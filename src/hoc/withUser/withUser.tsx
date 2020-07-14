@@ -1,6 +1,6 @@
 import React from 'react';
 import { CurrentUserId, GET_CURRENT_USER_ID } from './queries/getCurrentUserId';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import Loader from '../../atoms/Loader';
 
 export const withUser = (ParentComponent: any) => (props: any) => {

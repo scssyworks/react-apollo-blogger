@@ -1,8 +1,12 @@
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
-import { ApolloLink } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
+import {
+    ApolloClient,
+    ApolloLink,
+    NormalizedCacheObject,
+    HttpLink,
+    gql
+} from '@apollo/client';
+import { InMemoryCache } from '@apollo/client/cache';
+import { onError } from '@apollo/client/link/error';
 import { typeDefs, resolvers } from './resolvers';
 import { persistCache } from 'apollo-cache-persist';
 import { PersistentStorage, PersistedData } from 'apollo-cache-persist/types';
@@ -41,7 +45,14 @@ export const client = new ApolloClient({
 });
 
 // Writing local cache defaults
-cache.writeData({
+cache.writeQuery({
+    query: gql`
+        query UserData {
+            firstName
+            lastName
+            username
+        }
+    `,
     data: {
         firstName: '',
         lastName: '',
