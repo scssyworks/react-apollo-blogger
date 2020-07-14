@@ -5,7 +5,7 @@ export interface CurrentUserId {
 }
 
 export const GET_CURRENT_USER_ID = gql`
-    query {
+    query UserData {
         loggedInUserId @client
     }
 `;

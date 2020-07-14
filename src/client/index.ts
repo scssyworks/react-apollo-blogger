@@ -13,12 +13,7 @@ import { PersistentStorage, PersistedData } from 'apollo-cache-persist/types';
 
 const cache = new InMemoryCache();
 
-persistCache({
-    cache,
-    storage: window.localStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>
-});
-
-export const client = new ApolloClient({
+const client = new ApolloClient({
     cache,
     link: ApolloLink.from([
         onError(({ graphQLErrors, networkError }) => {
@@ -44,6 +39,12 @@ export const client = new ApolloClient({
     resolvers
 });
 
+persistCache({
+    cache: client.cache,
+    storage: window.localStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>
+});
+
+
 // Writing local cache defaults
 cache.writeQuery({
     query: gql`
@@ -51,11 +52,15 @@ cache.writeQuery({
             firstName
             lastName
             username
+            loggedInUserId
         }
     `,
     data: {
         firstName: '',
         lastName: '',
-        username: ''
+        username: '',
+        loggedInUserId: ''
     }
 });
+
+export { client };

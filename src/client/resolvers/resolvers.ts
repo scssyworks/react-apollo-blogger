@@ -35,13 +35,16 @@ interface AppResolvers extends Resolvers {
 
 const resolverFn = (type: string) => {
     return (_: any, data: Partial<CurrentUser>, { cache }: { cache: InMemoryCache }): string => {
-        cache.writeQuery({
-            query: gql`
-                query UserData {
-                    ${type}: String
-                }
-            `,
-            data
+        let currentData: any;
+        switch (type) {
+            case 'firstName': currentData = data.firstName; break;
+            case 'lastName': currentData = data.lastName; break;
+            default: currentData = currentData = data.username;
+        }
+        cache.modify({
+            fields: {
+                [type]: () => currentData
+            }
         });
         return 'success';
     };
@@ -53,14 +56,9 @@ export const resolvers: AppResolvers = {
         updateLastName: resolverFn('lastName'),
         updateUsername: resolverFn('username'),
         setUserId: (_: any, { id }: { id: string }, { cache }: { cache: InMemoryCache }): string => {
-            cache.writeQuery({
-                query: gql`
-                    query UserData {
-                        loggedInUserId: ID
-                    }
-                `,
-                data: {
-                    loggedInUserId: id
+            cache.modify({
+                fields: {
+                    loggedInUserId: () => id
                 }
             });
             return 'success';

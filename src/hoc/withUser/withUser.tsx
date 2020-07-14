@@ -5,6 +5,7 @@ import Loader from '../../atoms/Loader';
 
 export const withUser = (ParentComponent: any) => (props: any) => {
     const { data: userData } = useQuery<CurrentUserId>(GET_CURRENT_USER_ID);
+    console.log(userData);
     if (!userData?.loggedInUserId) {
         return <Loader />
     }
