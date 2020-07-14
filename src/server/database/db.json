@@ -11,6 +11,12 @@
       "description": "test",
       "userId": "oF5ARic",
       "id": "d2tq0Yr"
+    },
+    {
+      "title": "This is my first Article",
+      "description": "Hi Everyone, This is my first article. Let me know your thoughts on it.",
+      "userId": "JkAA7UZ",
+      "id": "hkUZBkm"
     }
   ],
   "comments": [],
@@ -20,6 +26,12 @@
       "lastName": "control",
       "username": "westernunion",
       "id": "oF5ARic"
+    },
+    {
+      "firstName": "Sachin",
+      "lastName": "Singh",
+      "username": "contactsachinsingh",
+      "id": "JkAA7UZ"
     }
   ]
 }
