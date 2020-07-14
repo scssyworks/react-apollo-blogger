@@ -1,7 +1,7 @@
 import React from 'react';
 import ArticleSummary from '../../components/ArticleSummary';
 import { Button } from '@material-ui/core';
-import classes from './index.module.scss';
+import classes from './ArticleList.module.scss';
 
 const ArticleList = ({ history }: {
     history: {

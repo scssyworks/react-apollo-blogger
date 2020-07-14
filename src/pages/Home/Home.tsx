@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import SignUpForm from '../../components/SignUpForm';
-import classes from './index.module.scss';
+import classes from './Home.module.scss';
 
 const Home = ({ history }: { history: any }) => (
     <section className="main-content">
