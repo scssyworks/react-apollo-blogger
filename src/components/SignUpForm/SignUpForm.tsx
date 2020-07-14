@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent } from 'react';
 import { Card, TextField, Button } from '@material-ui/core';
-import classes from './index.module.scss';
+import classes from './SignUpForm.module.scss';
 import { useQuery, useMutation } from 'react-apollo';
 import { CURRENT_USER, CurrentUser } from './queries/getCurrentUserQuery';
 import { SET_USER_NAME, SET_FIRST_NAME, SET_LAST_NAME, SET_USER_ID } from './mutations/setCurrentUser';

@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
-import classes from './index.module.scss';
+import classes from './EditArticleForm.module.scss';
 import { withUser } from '../../hoc/withUser';
 import { useMutation } from 'react-apollo';
 import { SUBMIT_ARTICLE } from './mutations/submitArticle';

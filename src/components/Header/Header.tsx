@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './index.module.scss';
+import classes from './Header.module.scss';
 import { Paper, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 

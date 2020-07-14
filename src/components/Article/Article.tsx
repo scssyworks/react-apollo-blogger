@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Typography, Button } from '@material-ui/core';
-import classes from './index.module.scss';
+import classes from './Article.module.scss';
 import Comments from '../Comments';
 
 const Article = () => (

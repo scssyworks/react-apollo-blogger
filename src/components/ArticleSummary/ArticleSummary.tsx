@@ -1,6 +1,6 @@
 import React from 'react';
 import ArticleItem from '../../molecules/ArticleItem';
-import classes from './index.module.scss';
+import classes from './ArticleSummary.module.scss';
 import { useQuery } from 'react-apollo';
 import { FETCH_LIST, ArticleListData } from './queries/fetchArticleList';
 import Loader from '../../atoms/Loader';
