@@ -21,7 +21,7 @@ const ArticleItem = ({ history, title, content, id, loggedInUserId }: {
         <li className={classes['article-list-item']}>
             <Card className={classes['article-item']}>
                 <Typography component="h2" variant="h6">
-                    <Link className={classes['article-title']} to="/article">{title}</Link>
+                    <Link className={classes['article-title']} to={`/post/${id}`}>{title}</Link>
                 </Typography>
                 <Typography component="p" variant="subtitle1">{content}</Typography>
                 <ButtonGroup size="small" variant="text" color="inherit" aria-label="text primary button group">

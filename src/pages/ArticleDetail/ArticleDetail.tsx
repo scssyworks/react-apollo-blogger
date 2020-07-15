@@ -1,9 +1,9 @@
 import React from 'react';
 import Article from '../../components/Article';
 
-const ArticleDetail = () => (
+const ArticleDetail = (props: any) => (
     <section className="main-content">
-        <Article />
+        <Article {...props} />
     </section>
 );
 

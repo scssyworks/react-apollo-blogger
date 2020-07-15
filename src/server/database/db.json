@@ -89,6 +89,12 @@
       "description": "post edited",
       "userId": "9m-DYkv",
       "id": "9nrp1Ev"
+    },
+    {
+      "title": "An article",
+      "description": "to test the detail page along with comments",
+      "userId": "HUxVBJ5",
+      "id": "0XGHXCr"
     }
   ],
   "comments": [],
@@ -224,6 +230,12 @@
       "lastName": "delete",
       "username": "functionality",
       "id": "PZObaVE"
+    },
+    {
+      "firstName": "testing",
+      "lastName": "detail",
+      "username": "page",
+      "id": "HUxVBJ5"
     }
   ]
 }
