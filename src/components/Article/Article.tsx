@@ -5,8 +5,9 @@ import classes from './Article.module.scss';
 import Comments from '../Comments';
 import { EXTENDED_ARTICLE, ExtendedArticle } from './queries/extendedArticle';
 import Loader from '../../atoms/Loader';
+import { withUser } from '../../hoc/withUser';
 
-const Article = ({ match, history }: {
+const Article = withUser(({ match, history, loggedInUserId }: {
     match: {
         params: {
             id: string;
@@ -14,7 +15,8 @@ const Article = ({ match, history }: {
     },
     history: {
         push: (url: string) => void;
-    }
+    },
+    loggedInUserId: string
 }) => {
     const { data, loading } = useQuery<ExtendedArticle>(EXTENDED_ARTICLE, {
         variables: {
@@ -32,9 +34,9 @@ const Article = ({ match, history }: {
             <Button className={classes['edit-btn']} variant="outlined" onClick={
                 () => history.push(`/article/edit/${match.params.id}`)
             }>Edit</Button>
-            <Comments data={article.comments} />
+            <Comments data={article.comments} userId={loggedInUserId} articleId={match.params.id} />
         </Card>
     );
-};
+});
 
 export default Article;
