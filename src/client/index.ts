@@ -20,14 +20,14 @@ const client = new ApolloClient({
             if (graphQLErrors) {
                 graphQLErrors.forEach(
                     ({ message, locations, path }) => {
-                        console.log(
+                        console.error(
                             `[GraphQL Error]: Message: ${message}, Location: ${locations}, Path: ${path}`
                         );
                     }
                 );
             }
             if (networkError) {
-                console.log(`[Network Error]: ${networkError}`);
+                console.error(`[Network Error]: ${networkError}`);
             }
         }),
         new HttpLink({

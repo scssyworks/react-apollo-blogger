@@ -24,14 +24,12 @@ const EditArticleForm = withUser(({ loggedInUserId, history, params }: {
         },
         skip: !editMode
     });
-    console.log(data);
     const { article } = data;
     if (article) {
         isButtonDisabled = false;
     }
     useEffect(() => {
         if (editMode) {
-            console.log(titleRef, contentRef, article?.title, article?.description);
             if (article?.title) {
                 titleRef.value = article?.title;
             }
