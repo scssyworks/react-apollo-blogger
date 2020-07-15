@@ -1,21 +1,46 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useEffect } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
 import classes from './EditArticleForm.module.scss';
 import { withUser } from '../../hoc/withUser';
-import { useMutation } from '@apollo/client';
-import { SUBMIT_ARTICLE } from './mutations/submitArticle';
+import { useMutation, useQuery } from '@apollo/client';
+import { SUBMIT_ARTICLE, SUBMIT_MODIFICATION } from './mutations/submitArticle';
 import { FETCH_LIST } from '../ArticleSummary/queries/fetchArticleList';
+import { CURRENT_ARTICLE, CurrentArticle } from './queries/currentArticle';
 
-const EditArticleForm = withUser(({ loggedInUserId, history }: {
+const EditArticleForm = withUser(({ loggedInUserId, history, params }: {
     loggedInUserId: string,
     history: {
         push: (url: string) => void
-    }
+    },
+    params: { id: string }
 }) => {
     let titleRef: HTMLInputElement;
     let contentRef: HTMLInputElement;
-
-    const [submitForm] = useMutation(SUBMIT_ARTICLE);
+    let editMode = Boolean(params.id);
+    let isButtonDisabled = editMode;
+    const { data = {} as CurrentArticle } = useQuery<CurrentArticle>(CURRENT_ARTICLE, {
+        variables: {
+            id: params.id
+        },
+        skip: !editMode
+    });
+    console.log(data);
+    const { article } = data;
+    if (article) {
+        isButtonDisabled = false;
+    }
+    useEffect(() => {
+        if (editMode) {
+            console.log(titleRef, contentRef, article?.title, article?.description);
+            if (article?.title) {
+                titleRef.value = article?.title;
+            }
+            if (article?.description) {
+                contentRef.value = article?.description;
+            }
+        }
+    });
+    const [submitForm] = useMutation(editMode ? SUBMIT_MODIFICATION : SUBMIT_ARTICLE);
 
     return (
         <section className={classes['form-section']}>
@@ -27,7 +52,7 @@ const EditArticleForm = withUser(({ loggedInUserId, history }: {
                         variables: {
                             title: titleRef.value,
                             description: contentRef.value,
-                            userId: loggedInUserId
+                            [editMode ? 'id' : 'userId']: editMode ? params.id : loggedInUserId
                         },
                         refetchQueries: [{
                             query: FETCH_LIST,
@@ -40,7 +65,7 @@ const EditArticleForm = withUser(({ loggedInUserId, history }: {
                 }}>
                     <TextField inputRef={(ref: any) => titleRef = ref} className={classes['title-text']} label="Topic" variant="outlined" />
                     <TextField inputRef={(ref: any) => contentRef = ref} label="Your text..." variant="outlined" multiline rows="4" />
-                    <Button type="submit" className={classes['form-submit']} variant="contained" disableElevation>Submit</Button>
+                    <Button type="submit" className={classes['form-submit']} variant="contained" disabled={isButtonDisabled} disableElevation>Submit</Button>
                 </form>
             </Card>
         </section>

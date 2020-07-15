@@ -4,12 +4,13 @@ import { Edit, Delete } from '@material-ui/icons';
 import classes from './ArticleItem.module.scss';
 import { Link } from 'react-router-dom';
 
-const ArticleItem = ({ history, title, content }: {
+const ArticleItem = ({ history, title, content, id }: {
     history: {
         push: (url: string) => void
     },
     title: string,
-    content: string
+    content: string,
+    id: string
 }) => (
         <li className={classes['article-list-item']}>
             <Card className={classes['article-item']}>
@@ -18,7 +19,7 @@ const ArticleItem = ({ history, title, content }: {
                 </Typography>
                 <Typography component="p" variant="subtitle1">{content}</Typography>
                 <ButtonGroup size="small" variant="text" color="inherit" aria-label="text primary button group">
-                    <Button className={classes['btn-color']} onClick={() => history.push('/article/edit/testid')}>
+                    <Button className={classes['btn-color']} onClick={() => history.push(`/article/edit/${id}`)}>
                         <Edit fontSize="small" color="inherit" />
                     </Button>
                     <Button className={classes['btn-color']}>

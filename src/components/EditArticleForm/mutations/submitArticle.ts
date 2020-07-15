@@ -7,3 +7,11 @@ export const SUBMIT_ARTICLE = gql`
         }
     }
 `;
+
+export const SUBMIT_MODIFICATION = gql`
+    mutation submitModification($title: String!, $description: String!, $id: ID!) {
+        updateArticle(title: $title, description: $description, id: $id) {
+            id
+        }
+    }
+`;
