@@ -22,7 +22,14 @@ const ArticleSummary = withUser(({ history, loggedInUserId }: { history: any, lo
     return (
         <ul className={classes['article-list']}>
             {articleData?.articles.map(
-                ({ title, description, id }) => <ArticleItem key={id} history={history} title={title} content={description} id={id} />
+                ({ title, description, id }) => <ArticleItem
+                    key={id}
+                    history={history}
+                    title={title}
+                    content={description}
+                    id={id}
+                    loggedInUserId={loggedInUserId}
+                />
             )}
         </ul>
     );
