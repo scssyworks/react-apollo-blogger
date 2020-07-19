@@ -43,6 +43,7 @@
     "fs-extra": "^8.1.0",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.4",
+    "graphql-tools": "^6.0.14",
     "html-webpack-plugin": "4.0.0-beta.11",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",

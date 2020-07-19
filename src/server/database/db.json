@@ -95,9 +95,49 @@
       "description": "to test the detail page along with comments",
       "userId": "HUxVBJ5",
       "id": "0XGHXCr"
+    },
+    {
+      "title": "new",
+      "description": "article",
+      "userId": "jNk1sxF",
+      "id": "AdkeLln"
+    },
+    {
+      "title": "Testin",
+      "description": "another article edit",
+      "userId": "VWUFpPn",
+      "id": "gZu4ce8"
+    },
+    {
+      "title": "testing",
+      "description": "another article",
+      "userId": "XCT3dGj",
+      "id": "LV7VECT"
     }
   ],
-  "comments": [],
+  "comments": [
+    {
+      "title": "",
+      "description": "test comment",
+      "articleId": "gZu4ce8",
+      "userId": "VWUFpPn",
+      "id": 1
+    },
+    {
+      "title": "",
+      "description": "testing comment",
+      "articleId": "LV7VECT",
+      "userId": "XCT3dGj",
+      "id": 2
+    },
+    {
+      "title": "",
+      "description": "testing comment 2",
+      "articleId": "LV7VECT",
+      "userId": "XCT3dGj",
+      "id": 3
+    }
+  ],
   "users": [
     {
       "firstName": "money",
@@ -242,6 +282,24 @@
       "lastName": "user",
       "username": "finalusertest",
       "id": "7g7lYii"
+    },
+    {
+      "firstName": "custom",
+      "lastName": "user",
+      "username": "customusername",
+      "id": "jNk1sxF"
+    },
+    {
+      "firstName": "Testing",
+      "lastName": "Screen",
+      "username": "testingusername",
+      "id": "VWUFpPn"
+    },
+    {
+      "firstName": "testing",
+      "lastName": "another",
+      "username": "userid",
+      "id": "XCT3dGj"
     }
   ]
 }

@@ -1,44 +1,21 @@
-import { gql } from 'apollo-server';
+import { makeExecutableSchema } from 'graphql-tools';
+import { Article } from './schemas/Article';
+import { Comment } from './schemas/Comment';
+import { Mutation } from './schemas/Mutation';
+import { User } from './schemas/User';
+import { resolvers } from './resolvers';
 
-const typeDefs = gql`
+const Query = `
     type Query {
         articles(userId: ID!): [Article]
         article(id: ID!): Article
         user(id: ID!): User
     }
-
-    type User {
-        id: ID
-        firstName: String
-        lastName: String
-        username: String
-    }
-
-    type Article {
-        id: ID
-        user: User
-        title: String
-        description: String
-        comments: [Comment]
-    }
-
-    type Comment {
-        id: ID
-        article: Article
-        user: User
-        title: String
-        description: String
-    }
-
-    type Mutation {
-        addArticle(title: String!, description: String!, userId: ID!): Article
-        deleteArticle(id: ID!): Article
-        updateArticle(title: String, description: String, id: ID!): Article
-        addComment(title: String!, description: String!, articleId: ID!, userId: ID!): Comment
-        deleteComment(id: ID!): Comment
-        editComment(title: String, description: String, id: ID!): Comment
-        createUser(firstName: String!, lastName: String!, username: String!): User
-    }
 `;
 
-export { typeDefs };
+const schema = makeExecutableSchema({
+    typeDefs: [Article, Comment, User, Query, Mutation],
+    resolvers
+});
+
+export { schema };

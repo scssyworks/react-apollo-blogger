@@ -10,6 +10,7 @@ export interface ExtendedArticle {
 }
 
 export interface Comment {
+    id: string;
     title: string;
     description: string;
     user: {
@@ -25,6 +26,7 @@ export const EXTENDED_ARTICLE = gql`
             title
             description
             comments {
+                id
                 title
                 description
                 user {

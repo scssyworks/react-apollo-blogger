@@ -33,8 +33,8 @@ const Comments = ({ data, userId, articleId }: { data: UserComment[], userId: st
             {
                 data.length
                     ? data.map(
-                        ({ user, title, description }: UserComment) => (
-                            <Fragment>
+                        ({ user, title, description, id }: UserComment) => (
+                            <Fragment key={id}>
                                 <p><strong>{`${user.firstName} ${user.lastName}`}:</strong> {title}</p>
                                 <p>{description}</p>
                             </Fragment>
