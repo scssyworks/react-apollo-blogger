@@ -3,7 +3,7 @@ import { CircularProgress } from '@material-ui/core';
 import classes from './Loader.module.scss';
 
 const Loader = () => (
-    <div className={classes.loader}>
+    <div data-testid="loader" className={classes.loader}>
         <CircularProgress />
     </div>
 );
