@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import ArticleItem from '../../molecules/ArticleItem';
 import classes from './ArticleSummary.module.scss';
 import { useQuery } from '@apollo/client';
 import { FETCH_LIST, ArticleListData } from './queries/fetchArticleList';
 import Loader from '../../atoms/Loader';
-import { withUser } from '../../hoc/withUser';
+import { withUser, UserProps } from '../../hoc/withUser';
 
-const ArticleSummary = withUser(({ history, loggedInUserId }: { history: any, loggedInUserId: string }) => {
+const ArticleSummary: FC<UserProps> = withUser(({ history, loggedInUserId }) => {
     // get list of articles for current user
     const { data: articleData, loading } = useQuery<ArticleListData>(FETCH_LIST, {
         variables: {

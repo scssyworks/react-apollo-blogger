@@ -1,12 +1,13 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import classes from './Comments.module.scss';
 import { TextField, Button } from '@material-ui/core';
 import { Comment as UserComment, EXTENDED_ARTICLE } from '../Article/queries/extendedArticle';
 import { useMutation } from '@apollo/client';
 import { POST_COMMENT } from './mutations/postComment';
+import { withUser, UserProps } from '../../hoc/withUser';
 
 
-const Comments = ({ data, userId, articleId }: { data: UserComment[], userId: string, articleId: string }) => {
+const Comments: FC<UserProps> = withUser(({ data, articleId, loggedInUserId }) => {
     let inputRef: HTMLInputElement;
     const [postComment] = useMutation(POST_COMMENT);
     return (
@@ -18,7 +19,7 @@ const Comments = ({ data, userId, articleId }: { data: UserComment[], userId: st
                         title: '',
                         description: inputRef.value,
                         articleId,
-                        userId
+                        userId: loggedInUserId
                     },
                     refetchQueries: [
                         {
@@ -44,6 +45,6 @@ const Comments = ({ data, userId, articleId }: { data: UserComment[], userId: st
             }
         </section>
     );
-};
+});
 
 export default Comments;

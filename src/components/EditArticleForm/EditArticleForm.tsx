@@ -7,13 +7,7 @@ import { SUBMIT_ARTICLE, SUBMIT_MODIFICATION } from './mutations/submitArticle';
 import { FETCH_LIST } from '../ArticleSummary/queries/fetchArticleList';
 import { CURRENT_ARTICLE, CurrentArticle } from './queries/currentArticle';
 
-const EditArticleForm = withUser(({ loggedInUserId, history, params }: {
-    loggedInUserId: string,
-    history: {
-        push: (url: string) => void
-    },
-    params: { id: string }
-}) => {
+const EditArticleForm = withUser(({ loggedInUserId, history, params }) => {
     let titleRef: HTMLInputElement;
     let contentRef: HTMLInputElement;
     let editMode = Boolean(params.id);
@@ -59,7 +53,7 @@ const EditArticleForm = withUser(({ loggedInUserId, history, params }: {
                             }
                         }]
                     });
-                    history.push('/posts');
+                    history?.push('/posts');
                 }}>
                     <TextField inputRef={(ref: any) => titleRef = ref} className={classes['title-text']} label="Topic" variant="outlined" />
                     <TextField inputRef={(ref: any) => contentRef = ref} label="Your text..." variant="outlined" multiline rows="4" />

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const Comment = () => (
+const Comment: FC = () => (
     <p>This is a simple comment</p>
 );
 
