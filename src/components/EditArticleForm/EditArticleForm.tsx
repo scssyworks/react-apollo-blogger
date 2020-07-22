@@ -1,62 +1,49 @@
-import React, { FormEvent, useEffect } from 'react';
+import React, { useEffect, FC, useRef } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
 import classes from './EditArticleForm.module.scss';
-import { withUser } from '../../hoc/withUser';
-import { useMutation, useQuery } from '@apollo/client';
-import { SUBMIT_ARTICLE, SUBMIT_MODIFICATION } from './mutations/submitArticle';
-import { FETCH_LIST } from '../ArticleSummary/queries/fetchArticleList';
-import { CURRENT_ARTICLE, CurrentArticle } from './queries/currentArticle';
+import { withUser, UserProps } from '../../hoc/withUser';
+import { CurrentArticle } from './queries/currentArticle';
+import { useEditArticle } from '../../hooks/useEditArticle';
 
-const EditArticleForm = withUser(({ loggedInUserId, history, params }) => {
-    let titleRef: HTMLInputElement;
-    let contentRef: HTMLInputElement;
+const EditArticleForm: FC<UserProps> = withUser(({ loggedInUserId, history, params }) => {
+    let titleRef = useRef<HTMLInputElement>(null);
+    let contentRef = useRef<HTMLInputElement>(null);
     let editMode = Boolean(params.id);
     let isButtonDisabled = editMode;
-    const { data = {} as CurrentArticle } = useQuery<CurrentArticle>(CURRENT_ARTICLE, {
+    const { data, submitArticle } = useEditArticle<CurrentArticle, string>({
         variables: {
             id: params.id
         },
         skip: !editMode
-    });
+    }, loggedInUserId!);
     const { article } = data;
     if (article) {
         isButtonDisabled = false;
     }
     useEffect(() => {
         if (editMode) {
-            if (article?.title) {
-                titleRef.value = article?.title;
+            if (article?.title && titleRef.current) {
+                titleRef.current.value = article?.title;
             }
-            if (article?.description) {
-                contentRef.value = article?.description;
+            if (article?.description && contentRef.current) {
+                contentRef.current.value = article?.description;
             }
         }
     });
-    const [submitForm] = useMutation(editMode ? SUBMIT_MODIFICATION : SUBMIT_ARTICLE);
 
     return (
         <section className={classes['form-section']}>
             <Typography component="h2" variant="h6">Article Editor</Typography>
             <Card className={classes['form-card']}>
-                <form noValidate autoComplete="off" onSubmit={async (e: FormEvent<HTMLFormElement>) => {
-                    e.preventDefault();
-                    await submitForm({
-                        variables: {
-                            title: titleRef.value,
-                            description: contentRef.value,
-                            [editMode ? 'id' : 'userId']: editMode ? params.id : loggedInUserId
-                        },
-                        refetchQueries: [{
-                            query: FETCH_LIST,
-                            variables: {
-                                userId: loggedInUserId
-                            }
-                        }]
+                <form noValidate autoComplete="off" onSubmit={async (e) => {
+                    await submitArticle(e, {
+                        title: titleRef.current?.value,
+                        description: contentRef.current?.value
                     });
                     history?.push('/posts');
                 }}>
-                    <TextField inputRef={(ref: any) => titleRef = ref} className={classes['title-text']} label="Topic" variant="outlined" />
-                    <TextField inputRef={(ref: any) => contentRef = ref} label="Your text..." variant="outlined" multiline rows="4" />
+                    <TextField inputRef={titleRef} className={classes['title-text']} label="Topic" variant="outlined" />
+                    <TextField inputRef={contentRef} label="Your text..." variant="outlined" multiline rows="4" />
                     <Button type="submit" className={classes['form-submit']} variant="contained" disabled={isButtonDisabled} disableElevation>Submit</Button>
                 </form>
             </Card>
