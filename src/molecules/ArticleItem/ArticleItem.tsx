@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
-import { useMutation } from '@apollo/client';
 import { Card, Typography, ButtonGroup, Button } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
 import classes from './ArticleItem.module.scss';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { DELETE_ARTICLE } from './mutations/deleteArticle';
-import { FETCH_LIST } from '../../components/ArticleSummary/queries/fetchArticleList';
+import { useDeleteArticle } from '../../hooks/useDeleteArticle';
 
 interface Props extends Partial<RouteComponentProps> {
     title: string;
@@ -15,7 +13,7 @@ interface Props extends Partial<RouteComponentProps> {
 }
 
 const ArticleItem: FC<Props> = ({ history, title, content, id, loggedInUserId }) => {
-    const [deleteArticle] = useMutation(DELETE_ARTICLE);
+    const [deleteArticle] = useDeleteArticle({ id, userId: loggedInUserId });
     return (
         <li className={classes['article-list-item']}>
             <Card className={classes['article-item']}>
@@ -27,21 +25,7 @@ const ArticleItem: FC<Props> = ({ history, title, content, id, loggedInUserId })
                     <Button className={classes['btn-color']} onClick={() => history?.push(`/article/edit/${id}`)}>
                         <Edit fontSize="small" color="inherit" />
                     </Button>
-                    <Button className={classes['btn-color']} onClick={async () => {
-                        await deleteArticle({
-                            variables: {
-                                id
-                            },
-                            refetchQueries: [
-                                {
-                                    query: FETCH_LIST,
-                                    variables: {
-                                        userId: loggedInUserId
-                                    }
-                                }
-                            ]
-                        });
-                    }}>
+                    <Button className={classes['btn-color']} onClick={deleteArticle}>
                         <Delete fontSize="small" color="inherit" />
                     </Button>
                 </ButtonGroup>

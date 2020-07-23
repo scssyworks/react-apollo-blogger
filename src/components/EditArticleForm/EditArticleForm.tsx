@@ -1,4 +1,4 @@
-import React, { useEffect, FC, useRef } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
 import classes from './EditArticleForm.module.scss';
 import { withUser, UserProps } from '../../hoc/withUser';
@@ -6,10 +6,7 @@ import { CurrentArticle } from './queries/currentArticle';
 import { useEditArticle } from '../../hooks/useEditArticle';
 
 const EditArticleForm: FC<UserProps> = withUser(({ loggedInUserId, history, params }) => {
-    let titleRef = useRef<HTMLInputElement>(null);
-    let contentRef = useRef<HTMLInputElement>(null);
-    let editMode = Boolean(params.id);
-    let isButtonDisabled = editMode;
+    const editMode = Boolean(params.id);
     const { data, submitArticle } = useEditArticle<CurrentArticle, string>({
         variables: {
             id: params.id
@@ -17,19 +14,17 @@ const EditArticleForm: FC<UserProps> = withUser(({ loggedInUserId, history, para
         skip: !editMode
     }, loggedInUserId!);
     const { article } = data;
-    if (article) {
-        isButtonDisabled = false;
-    }
+    const loading = editMode && !Boolean(article);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const receivedTitle = article?.title || '';
+    const receivedDescription = article?.description || '';
     useEffect(() => {
         if (editMode) {
-            if (article?.title && titleRef.current) {
-                titleRef.current.value = article?.title;
-            }
-            if (article?.description && contentRef.current) {
-                contentRef.current.value = article?.description;
-            }
+            setTitle(receivedTitle);
+            setDescription(receivedDescription);
         }
-    });
+    }, [editMode, receivedTitle, receivedDescription]);
 
     return (
         <section className={classes['form-section']}>
@@ -37,14 +32,14 @@ const EditArticleForm: FC<UserProps> = withUser(({ loggedInUserId, history, para
             <Card className={classes['form-card']}>
                 <form noValidate autoComplete="off" onSubmit={async (e) => {
                     await submitArticle(e, {
-                        title: titleRef.current?.value,
-                        description: contentRef.current?.value
+                        title,
+                        description
                     });
                     history?.push('/posts');
                 }}>
-                    <TextField inputRef={titleRef} className={classes['title-text']} label="Topic" variant="outlined" />
-                    <TextField inputRef={contentRef} label="Your text..." variant="outlined" multiline rows="4" />
-                    <Button type="submit" className={classes['form-submit']} variant="contained" disabled={isButtonDisabled} disableElevation>Submit</Button>
+                    <TextField value={title} className={classes['title-text']} label="Topic" variant="outlined" onChange={(e) => setTitle(e.target.value)} />
+                    <TextField value={description} label="Your text..." variant="outlined" multiline rows="4" onChange={(e) => setDescription(e.target.value)} />
+                    <Button type="submit" className={classes['form-submit']} variant="contained" disabled={loading} disableElevation>Submit</Button>
                 </form>
             </Card>
         </section>
