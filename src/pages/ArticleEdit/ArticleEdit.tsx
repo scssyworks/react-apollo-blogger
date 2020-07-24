@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import EditArticleForm from '../../components/EditArticleForm';
+import { RouteComponentProps } from 'react-router-dom';
 
-const ArticleEdit = ({ history, match }: { history: any, match: { params: any } }) => (
+const ArticleEdit: FC<RouteComponentProps> = ({ history, match }) => (
     <section className="main-content">
         <EditArticleForm history={history} params={match.params} />
     </section>

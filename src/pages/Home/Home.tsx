@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
 import SignUpForm from '../../components/SignUpForm';
 import classes from './Home.module.scss';
+import { RouteComponentProps } from 'react-router-dom';
 
-const Home = ({ history }: { history: any }) => (
+const Home: FC<RouteComponentProps> = ({ history }) => (
     <section className="main-content">
         <Typography component="h2" variant="h6">
             Sign-up to create your personal blog

@@ -22,6 +22,12 @@
       "lastName": "cookie",
       "username": "persistence",
       "id": 1
+    },
+    {
+      "firstName": "create",
+      "lastName": "user",
+      "username": "test",
+      "id": 2
     }
   ]
 }
