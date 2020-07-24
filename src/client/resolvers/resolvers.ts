@@ -2,6 +2,8 @@ import gql from 'graphql-tag';
 import { InMemoryCache } from '@apollo/client/cache';
 import { Resolvers } from '@apollo/client';
 import { CurrentUser } from '../../components/SignUpForm/queries/getCurrentUserQuery';
+// @ts-ignore
+import { setCookie } from 'argon-storage';
 
 export const typeDefs = gql`
     type Query {
@@ -58,7 +60,10 @@ export const resolvers: AppResolvers = {
         setUserId: (_: any, { id }: { id: string }, { cache }: { cache: InMemoryCache }): string => {
             cache.modify({
                 fields: {
-                    loggedInUserId: () => id
+                    loggedInUserId: () => {
+                        setCookie('loggedInUserId', id);
+                        return id;
+                    }
                 }
             });
             return 'success';

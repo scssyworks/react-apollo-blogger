@@ -1,15 +1,14 @@
 import {
     ApolloClient,
     ApolloLink,
-    NormalizedCacheObject,
     HttpLink,
     gql
 } from '@apollo/client';
 import { InMemoryCache } from '@apollo/client/cache';
 import { onError } from '@apollo/client/link/error';
 import { typeDefs, resolvers } from './resolvers';
-import { persistCache } from 'apollo-cache-persist';
-import { PersistentStorage, PersistedData } from 'apollo-cache-persist/types';
+// @ts-ignore
+import { getCookie } from 'argon-storage';
 
 const cache = new InMemoryCache();
 
@@ -39,13 +38,9 @@ const client = new ApolloClient({
     resolvers
 });
 
-persistCache({
-    cache: client.cache,
-    storage: window.localStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>
-});
-
 
 // Writing local cache defaults
+const loggedInUserId = getCookie('loggedInUserId') || '';
 cache.writeQuery({
     query: gql`
         query UserData {
@@ -59,7 +54,7 @@ cache.writeQuery({
         firstName: '',
         lastName: '',
         username: '',
-        loggedInUserId: ''
+        loggedInUserId
     }
 });
 
